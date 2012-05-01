@@ -1,0 +1,131 @@
+<project name="xqrails-installer" basedir="." xmlns:ml="http://www.marklogic.com/ant">
+	<filterset id="installer">
+
+	</filterset>
+
+	<target name="install" description="Generates controller, model and views for the specified object">
+		<echo message="Application directory found at [${xqRails.application.projectLocation}]" />
+		<antcall target="verify-xdbc-connection" />
+		<antcall target="load-modules" />
+		<antcall target="run-application-install" />
+		<antcall target="run-application-xdbc-install" />
+		<antcall target="run-security-install" />
+		<antcall target="run-application-authentication-install" />
+		<antcall target="run-application-xdbc-authentication-install" />
+		<antcall target="load-documentation" />
+		<antcall target="load-base-mappings" />
+	</target>
+
+	<target name="verify-xdbc-connection">
+		<echo message="Checking xdbc connection at [${xqRails.xdbc.connectionString}]" />
+		<ml:query xccurl="${xqRails.xdbc.connectionString}" query="'Connected Successfully'" failonerror="yes" />
+	</target>
+
+	<target name="load-modules">
+		<echo message="Loading modules for install execution in modules db" />
+		<ml:load xccurl="${xqRails.xdbc.connectionString}/Modules" failonerror="yes">
+			<ml:docset destdir="/xqrails/">
+				<ml:permissionset>
+					<ml:permission role="admin" permission="execute" />
+					<ml:permission role="admin" permission="insert" />
+					<ml:permission role="admin" permission="read" />
+					<ml:permission role="admin" permission="update" />
+				</ml:permissionset>
+				<fileset dir="config/scripts/" includes="**/*" />
+			</ml:docset>
+		</ml:load>
+	</target>
+
+	<target name="run-application-install">
+		<echo message="Installing application at localhost:${xqRails.application.port}" />
+		<ml:invoke xccurl="${xqRails.xdbc.connectionString}/Modules" moduleUri="/xqrails/install.xqy" failonerror="yes">
+			<ml:paramset>
+				<ml:param name="port" ns="" type="string" value="${xqRails.application.port}" />
+				<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
+				<ml:param name="router" ns="" type="string" value="${xqRails.application.urlRewriter}" />
+				<ml:param name="source" ns="" type="string" value="${xqRails.application.projectLocation}" />
+			</ml:paramset>
+		</ml:invoke>
+	</target>
+	
+	<target name="uninstall">
+			<echo message="Uninstalling application at localhost:${xqRails.application.port}" />
+			<ml:invoke xccurl="${xqRails.xdbc.connectionString}/Modules" moduleUri="/xqrails/uninstall.xqy" failonerror="yes">
+				<ml:paramset>
+					<ml:param name="httpPort" ns="" type="string" value="${xqRails.application.port}" />
+					<ml:param name="xdbcPort" ns="" type="string" value="${xqRails.application.xdbc.port}" />
+					<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
+					<ml:param name="router" ns="" type="string" value="${xqRails.application.urlRewriter}" />
+					<ml:param name="source" ns="" type="string" value="${xqRails.application.projectLocation}" />
+				</ml:paramset>
+			</ml:invoke>
+		</target>
+
+	<target name="run-application-xdbc-install">
+		<echo message="Installing application xdbc at localhost:${xqRails.application.xdbc.port}" />
+		<ml:invoke xccurl="${xqRails.xdbc.connectionString}/Modules" moduleUri="/xqrails/install-xdbc.xqy" failonerror="yes">
+			<ml:paramset>
+				<ml:param name="port" ns="" type="string" value="${xqRails.application.xdbc.port}" />
+				<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
+				<ml:param name="source" ns="" type="string" value="${xqRails.application.projectLocation}" />
+			</ml:paramset>
+		</ml:invoke>
+	</target>
+
+	<target name="run-security-install">
+		<echo message="Installing security for localhost:${xqRails.application.port}" />
+		<ml:invoke xccurl="${xqRails.xdbc.connectionString}/Security" moduleUri="/xqrails/security.xqy" failonerror="yes">
+			<ml:paramset>
+				<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
+			</ml:paramset>
+		</ml:invoke>
+	</target>
+
+	<target name="run-application-authentication-install">
+		<echo message="Installing application authentication for localhost:${xqRails.application.port}" />
+		<ml:invoke xccurl="${xqRails.xdbc.connectionString}/Modules" moduleUri="/xqrails/set-application-security.xqy" failonerror="yes">
+			<ml:paramset>
+				<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
+				<ml:param name="port" ns="" type="string" value="${xqRails.application.port}" />
+			</ml:paramset>
+		</ml:invoke>
+	</target>
+
+	<target name="run-application-xdbc-authentication-install">
+		<echo message="Installing application xdbc authentication for localhost:${xqRails.application.port}" />
+		<ml:invoke xccurl="${xqRails.xdbc.connectionString}/Modules" moduleUri="/xqrails/set-application-xdbc-security.xqy" failonerror="yes">
+			<ml:paramset>
+				<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
+				<ml:param name="port" ns="" type="string" value="${xqRails.application.xdbc.port}" />
+			</ml:paramset>
+		</ml:invoke>
+	</target>
+	
+	<target name="load-documentation">
+		<echo message="Updating documentation" />
+		<ml:load xccurl="${xqRails.xdbc.connectionString}/${xqRails.application.name}" failonerror="yes">
+			<ml:docset destdir="/application/documentation">
+				<ml:permissionset>
+					<ml:permission role="security-anon" permission="read" />
+				</ml:permissionset>
+				<fileset dir="xqrails-app/docs" includes="**/*" />
+			</ml:docset>
+		</ml:load>
+	</target>
+	
+	<target name="load-base-mappings">
+			<echo message="Loading base mappings files for initial clean install" />
+			<ml:load xccurl="${xqRails.xdbc.connectionString}/${xqRails.application.dbname}" failonerror="yes">
+				<ml:docset destdir="/application/">
+					<ml:permissionset>
+						<ml:permission role="admin" permission="execute" />
+						<ml:permission role="admin" permission="insert" />
+						<ml:permission role="admin" permission="read" />
+						<ml:permission role="admin" permission="update" />
+						<ml:permission role="security-anon" permission="read" />
+					</ml:permissionset>
+					<fileset dir="config/data/application/" includes="**/*" />
+				</ml:docset>
+			</ml:load>
+		</target>
+</project>

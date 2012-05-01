@@ -1,0 +1,38 @@
+<target name="unittest" description="Execute unit tests"
+          depends="compile-tests">
+    <ivy:cachepath conf="test" pathid="test.refid"/>
+    <mkdir dir="tmp/rawtestoutput"/>
+    <junit printsummary="true" failureproperty="junit.failure">
+      <!-- N.b. use failureproperty instead of haltonfailure, because if we use
+           the former, we will get no detailed report about the failure.
+           If the test fails, the fail element below will still assure that
+           the Ant run will exit with error status.
+      -->
+      <classpath refid="test.refid"/>
+      <classpath path="classes:test-classes"/>
+      <!-- Ant provides several ways to set the classpath.  The critical thing
+           is just that the final classpath for the junit task must include
+           the junit-4.x jar file, the test classes, and all classes referred
+           to directly or indirectly by your test classes.  -->
+
+      <batchtest todir="tmp/rawtestoutput">
+        <fileset dir="test-classes"/>
+        <formatter type="xml"/>
+      </batchtest>
+      <!-- In the unlikely case that you just have a single test class,
+           use a test element like this instead of the batchtest element
+           above:   <test name='com.admc.jamama.smtp.SMTPTest'/>
+           You can nest the formatter inside it, just like batchtest.
+      -->
+
+      <!-- You can use sysproperty elements to pass configuration settings
+           to your test classes, or to appplication classes they will run:
+     <sysproperty key="targetserver.test" value="mercedes"/>
+     -->
+    </junit>
+    <junitreport todir="tmp">
+      <fileset dir="tmp/rawtestoutput"/>
+      <report todir="test-reports"/>
+    </junitreport>
+    <fail if="junit.failure" message="Unit test(s) failed.  See reports!"/>:w
+  </target>

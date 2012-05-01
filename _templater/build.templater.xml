@@ -1,0 +1,83 @@
+<project name="xqrails-templater" basedir=".">
+	<property name="xqrails.location.controllers" value="xqrails-app/controllers/" />
+	<property name="xqrails.location.views" value="xqrails-app/views/" />
+	<property name="xqrails.location.models" value="xqrails-app/models/" />
+	<property name="xqrails.location.docs" value="xqrails-app/docs/" />
+	<property name="xqrails.location.models.test" value="test/src/org/xqrails/models" />
+	<property name="xqrails.location.controllers.test" value="test/src/org/xqrails/controllers" />
+	<property name="xqrails.core.namespace" value="http://avalonconsult.com/xqrails" />
+	<property name="xqrails.model.transient" value="false" />
+
+
+	<filterset id="xqrails">
+		<filter token="object" value="${object}" />
+		<filter token="object-escaped" value="${object}" />
+		<filter token="xqrails.core.namespace" value="${xqrails.core.namespace}" />
+		<filter token="local-namespace" value="${local-namespace}" />
+	</filterset>
+
+	<target name="generate-all" description="Generates controller, model and views for the specified object">
+		<antcall target="validate-params" />
+		<echo message="Generating xqrails all for object [${object}]" />
+		<antcall target="generate-controller" />
+		<antcall target="generate-model" />
+		<antcall target="generate-views" />
+		<antcall target="generate-docs" />
+	</target>
+
+	<target name="generate-controller">
+		<mkdir dir="${xqrails.location.views}/${object}" />
+		<copy overwrite="${xqrails.generate.overwrite}" file="_templater/scaffolds/controller.xqy" tofile="${xqrails.location.controllers}/${object}.xqy">
+			<filterset refid="xqrails" />
+		</copy>
+		<copy overwrite="${xqrails.generate.overwrite}" file="_templater/test/controller.java" tofile="${xqrails.location.controllers.test}/${object}Test.java">
+			<filterset refid="xqrails" />
+		</copy>
+	</target>
+
+	<target name="generate-model">
+		<copy overwrite="${xqrails.generate.overwrite}" file="_templater/scaffolds/model.xqy" tofile="${xqrails.location.models}/${object}.xqy">
+			<filterset refid="xqrails" />
+		</copy>
+		<copy overwrite="${xqrails.generate.overwrite}" file="_templater/test/model.java" tofile="${xqrails.location.models.test}/${object}Test.java">
+			<filterset refid="xqrails" />
+		</copy>
+	</target>
+
+	<target name="generate-model-transient">
+		<!-- add check to prompt for existance and ask for override -->
+		<copy overwrite="${xqrails.generate.overwrite}" file="_templater/scaffolds/model-transient.xqy" tofile="${xqrails.location.models}/${object}.xqy">
+			<filterset refid="xqrails" />
+		</copy>
+	</target>
+
+	<target name="generate-views">
+		<mkdir dir="${xqrails.location.views}/${object}" />
+		<copy overwrite="${xqrails.generate.overwrite}" todir="${xqrails.location.views}/${object}">
+			<fileset dir="_templater/scaffolds/views" />
+			<filterset refid="xqrails" />
+		</copy>
+	</target>
+	
+	<target name="generate-docs">
+		<!-- add check to prompt for existance and ask for override -->
+		<copy overwrite="${xqrails.generate.overwrite}" file="_templater/scaffolds/docs.xml" tofile="${xqrails.location.docs}/${object}.xml">
+			<filterset refid="xqrails" />
+		</copy>
+	</target>
+
+	<target name="init-params">
+		<condition property="missing.object.name">
+			<not>
+				<isset property="object" />
+			</not>
+		</condition>
+		<antcall target="validate-params" />
+	</target>
+
+
+
+	<target name="validate-params" if="missing.object.name">
+		<fail message="Missing object name - please add -Dobject=[] to the arguments" />
+	</target>
+</project>

@@ -1,0 +1,18 @@
+<mappings>
+	<mapping>
+		<url>/test</url>
+		<controller>default</controller>
+		<action>index</action>
+	</mapping>
+	<!-- sample mapping 
+	
+	** use $ prefix to declare variable
+	** variable is available in params
+	<mapping>
+		<url>/test/$testId/item/$itemId</url>
+		<controller>test</controller>
+		<action>action</action>
+	</mapping>
+	
+	-->
+</mappings>

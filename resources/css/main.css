@@ -1,0 +1,623 @@
+html * {
+	margin: 0;
+	/*padding: 0; SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
+}
+
+/* GENERAL */
+.spinner {
+	padding: 5px;
+	position: absolute;
+	right: 0;
+}
+
+body {
+	background: #fff;
+	color: #333;
+	font: 12px verdana, arial, helvetica, sans-serif;
+}
+
+#xqrailsLogo {
+	padding: 20px;
+}
+
+p {
+	font-size: 1.1em;
+	margin: 10px;
+}
+
+.body {
+	float: left;
+	/*margin: 0 15px 10px 15px;*/
+	width: 99.9%;
+}
+/* NAVIGATION MENU */
+.nav {
+	background: #fff url(../images/header-columns-bg.gif) bottom repeat-x;
+	border: 1px solid #ccc;
+	border-style: solid none solid none;
+	margin-top: 5px;
+	padding: 7px 12px;
+}
+
+.menuButton {
+	font-size: 10px;
+	padding: 0 5px;
+}
+
+.menuButton a {
+	color: #333;
+	padding: 4px 6px;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.menuButton a.home {
+	background: url(/resources/images/icons/application_home.png) center
+		left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.menuButton a.list {
+	background: url(/resources/images/icons/page_code.png) center left
+		no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.menuButton a.documentation {
+	background: url(/resources/images/icons/document_info.png) center left
+		no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.menuButton a.create {
+	background: url(/resources/images/icons/page_add.png) center left
+		no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.menuButton a.find {
+	background: url(/resources/images/icons/page_find.png) center left
+		no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+/* ACTION BUTTONS */
+.buttons {
+	background: #fff url(../images/header-columns-bg.gif) bottom repeat-x;
+	border: 1px solid #ccc;
+	border-style: solid none solid none;
+	margin-top: 5px;
+	padding: 7px 12px;
+	min-height: 15px;
+}
+
+.buttons input {
+	background: #fff;
+	border: 0;
+	color: #333;
+	cursor: pointer;
+	font-size: 10px;
+	font-weight: bold;
+	margin-left: 3px;
+	overflow: visible;
+	padding: 2px 6px;
+}
+
+.buttons input.delete {
+	background: transparent url(/resources/images/icons/page_delete.png) 5px
+		50% no-repeat;
+	padding-left: 28px;
+}
+
+.buttons input.edit {
+	background: transparent url(/resources/images/icons/page_edit.png) 5px
+		50% no-repeat;
+	padding-left: 28px;
+}
+
+.buttons input.save {
+	background: transparent url(/resources/images/icons/page_save.png) 5px
+		50% no-repeat;
+	padding-left: 28px;
+}
+
+.slick-header-columns {
+	background: url('../images/header-columns-bg.gif') repeat-x center
+		bottom;
+	border-bottom: 1px solid silver;
+}
+
+.slick-header-column {
+	background: url('../images/header-columns-bg.gif') repeat-x center
+		bottom;
+	border-right: 1px solid silver;
+}
+
+.slick-header-column:hover,.slick-header-column-active {
+	background: white url('../images/header-columns-over-bg.gif') repeat-x
+		center bottom;
+}
+
+.slick-headerrow {
+	background: #fafafa;
+}
+
+.slick-headerrow-column {
+	background: #fafafa;
+	border-bottom: 0;
+	height: 100%;
+}
+
+.slick-row.ui-state-active {
+	background: #F5F7D7;
+}
+
+.slick-row {
+	position: absolute;
+	background: white;
+	border: 0px;
+	line-height: 20px;
+}
+
+.slick-row.selected {
+	z-index: 10;
+	background: #DFE8F6;
+}
+
+.slick-cell {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.slick-group {
+	border-bottom: 2px solid silver;
+}
+
+.slick-group-toggle {
+	width: 9px;
+	height: 9px;
+	margin-right: 5px;
+}
+
+.slick-group-toggle.expanded {
+	background: url(../images/collapse.gif) no-repeat center center;
+}
+
+.slick-group-toggle.collapsed {
+	background: url(../images/expand.gif) no-repeat center center;
+}
+
+.slick-group-totals {
+	color: gray;
+	background: white;
+}
+
+.slick-cell.selected {
+	background-color: beige;
+}
+
+.slick-cell.active {
+	border-color: gray;
+	border-style: solid;
+}
+
+.slick-sortable-placeholder {
+	background: silver !important;
+}
+
+.slick-row[row $="1"],.slick-row[row $="3"],.slick-row[row $="5"],.slick-row[row
+	$="7"],.slick-row[row $="9"] {
+	background: #fafafa;
+}
+
+.slick-row.ui-state-active {
+	background: #F5F7D7;
+}
+
+.slick-row.loading {
+	opacity: 0.5;
+	filter: alpha(opacity =     50);
+}
+
+.slick-cell.invalid {
+	border-color: red;
+}
+
+#myGrid {
+	background: white;
+	outline: 0;
+	border: 1px solid gray;
+}
+
+.grid-header {
+	border: 1px solid gray;
+	border-bottom: 0;
+	border-top: 0;
+	background: url('../images/header-bg.gif') repeat-x center top;
+	color: black;
+	height: 24px;
+	line-height: 24px;
+}
+
+.grid-header label {
+	display: inline-block;
+	font-weight: bold;
+	margin: auto auto auto 6px;
+}
+
+.grid-header .ui-icon {
+	margin: 4px 4px auto 6px;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.grid-header .ui-icon.ui-state-hover {
+	background-color: white;
+}
+
+.grid-header #txtSearch {
+	margin: 0 4px 0 4px;
+	padding: 2px 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border: 1px solid silver;
+}
+
+.options-panel {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border: 1px solid silver;
+	background: #f0f0f0;
+	padding: 4px;
+	margin-bottom: 20px;
+	width: 320px;
+	position: absolute;
+	top: 0px;
+	left: 650px;
+}
+
+/* Individual cell styles */
+.slick-cell.task-name {
+	font-weight: bold;
+	text-align: right;
+}
+
+.slick-cell.task-percent {
+	text-align: right;
+}
+
+.slick-cell.cell-move-handle {
+	font-weight: bold;
+	text-align: right;
+	border-right: solid gray;
+	background: #efefef;
+	cursor: move;
+}
+
+.cell-move-handle:hover {
+	background: #b6b9bd;
+}
+
+.slick-row.selected .cell-move-handle {
+	background: #D5DC8D;
+}
+
+.slick-row .cell-actions {
+	text-align: left;
+}
+
+.slick-row.complete {
+	background-color: #DFD;
+	color: #555;
+}
+
+.percent-complete-bar {
+	display: inline-block;
+	height: 6px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+/* TextCellEditor, DateCellEditor */
+input.editor-text {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	margin: 0;
+	background: transparent;
+	outline: 0;
+	padding: 0;
+}
+
+.ui-datepicker-trigger {
+	margin-top: 2px;
+	padding: 0;
+	vertical-align: top;
+}
+
+/* PercentCompleteCellEditor */
+input.editor-percentcomplete {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	margin: 0;
+	background: transparent;
+	outline: 0;
+	padding: 0;
+	float: left;
+}
+
+.editor-percentcomplete-picker {
+	position: relative;
+	display: inline-block;
+	width: 16px;
+	height: 100%;
+	background: url("../images/pencil.gif") no-repeat center center;
+	overflow: visible;
+	z-index: 1000;
+	float: right;
+}
+
+.editor-percentcomplete-helper {
+	border: 0 solid gray;
+	position: absolute;
+	top: -2px;
+	left: -9px;
+	background: url("../images/editor-helper-bg.gif") no-repeat top left;
+	padding-left: 9px;
+	width: 120px;
+	height: 140px;
+	display: none;
+	overflow: visible;
+}
+
+.editor-percentcomplete-wrapper {
+	background: beige;
+	padding: 20px 8px;
+	width: 100%;
+	height: 98px;
+	border: 1px solid gray;
+	border-left: 0;
+}
+
+.editor-percentcomplete-buttons {
+	float: right;
+}
+
+.editor-percentcomplete-buttons button {
+	width: 80px;
+}
+
+.editor-percentcomplete-slider {
+	float: left;
+}
+
+.editor-percentcomplete-picker:hover .editor-percentcomplete-helper {
+	display: block;
+}
+
+.editor-percentcomplete-helper:hover {
+	display: block;
+}
+
+/* YesNoSelectCellEditor */
+select.editor-yesno {
+	width: 100%;
+	margin: 0;
+	vertical-align: middle;
+}
+
+/* YesNoCheckboxCellEditor */
+input.editor-checkbox {
+	margin: 0;
+	height: 100%;
+	padding: 0;
+	border: 0;
+}
+
+.slick-pager {
+	width: 100%;
+	height: 26px;
+	border: 1px solid gray;
+	border-top: 0;
+	background: url('../images/header-columns-bg.gif') repeat-x center
+		bottom;
+	vertical-align: middle;
+}
+
+.slick-pager .slick-pager-status {
+	display: inline-block;
+	padding: 6px;
+}
+
+.slick-pager .ui-icon-container {
+	display: inline-block;
+	margin: 2px;
+	border-color: gray;
+}
+
+.slick-pager .slick-pager-nav {
+	display: inline-block;
+	float: left;
+	padding: 2px;
+}
+
+.slick-pager .slick-pager-settings {
+	display: block;
+	float: right;
+	padding: 2px;
+}
+
+.slick-pager .slick-pager-settings * {
+	vertical-align: middle;
+}
+
+.slick-pager .slick-pager-settings a {
+	padding: 2px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.slick-columnpicker {
+	border: 1px solid #718BB7;
+	background: #f0f0f0;
+	padding: 6px;
+	-moz-box-shadow: 2px 2px 2px silver;
+	-webkit-box-shadow: 2px 2px 2px silver;
+	min-width: 100px;
+	cursor: default;
+}
+
+.slick-columnpicker li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background: none;
+}
+
+.slick-columnpicker input {
+	margin: 4px;
+}
+
+.slick-columnpicker li a {
+	display: block;
+	padding: 4px;
+	font-weight: bold;
+}
+
+.slick-columnpicker li a:hover {
+	background: white;
+}
+
+.cell-title {
+	font-weight: bold;
+}
+
+.cell-effort-driven {
+	text-align: center;
+}
+
+.cell-selection {
+	border-right-color: silver;
+	border-right-style: solid;
+	background: #f5f5f5;
+	color: gray;
+	text-align: right;
+	font-size: 10px;
+}
+
+.slick-row.selected .cell-selection {
+	background-color: transparent;
+	/* show default selected row background */
+}
+
+.slick-row .slick-cell .ui-icon {
+	margin: 4px 4px auto 6px;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.CodeMirror {
+	border: 1px solid #eee;
+}
+
+.CodeMirror-scroll {
+	height: auto;
+	min-height:20px;
+	max-height:400px;
+	overflow-y: auto;
+	overflow-x: auto;
+	width: 100%;
+}
+table
+{
+	
+	width: 99%;
+	/* margin-left:2%; */
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #eee;
+	margin-top:5px;
+}
+
+table td table
+{
+	
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #eee;
+	margin:5px 0;
+}
+
+table tbody
+{
+	background: #fff;
+}
+table td
+{
+	padding: 3px;
+	border-top: 1px dotted #eee;
+	vertical-align:top;
+}
+table td:first-child
+{
+	width:15%;
+	font-weight:bold
+}
+.module h2 {
+        /* background: #ddd; */
+        padding: 0 0 0 10px;
+        font-size: 14px;
+
+        /* Thickness of the bar more easily achieved with line-height
+           since padding would push link inward.  */
+        line-height: 2;
+}
+.module div.content {
+	padding: 0 0 0 10px;
+}
+.module h2 a {
+        float: right;
+        position: relative;
+        text-decoration: none;
+        color: #333;
+        background-color:#ccc;
+        padding: 0 10px;
+        border-left: 5px solid white;
+}
+.module h2 a:before,
+.module h2 a:after {
+        content: "";
+        position: absolute;
+        /* Pushed down half way, will get pulled back up half height of triangle
+           ensures centering if font-size or line-height changes */
+        top: 50%;
+        width: 0;
+        height: 0;
+}
+.module h2 a:before {
+        left: -12px;
+        /* Triangle */
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right: 8px solid white;
+        /* Pull-up */
+        margin-top: -8px;
+}
+.module h2 a:after {
+        /* Smaller and different position triangle */
+        left: -5px;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 6px solid #ccc;
+        margin-top: -6px;
+}
+.module div.accordion div.content {}
+

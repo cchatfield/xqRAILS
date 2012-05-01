@@ -1,0 +1,68 @@
+<project name="xqrails" default="help" basedir=".">
+	<import file="_templater/build.templater.xml" />
+	<import file="config/build.installer.xml" />
+	<property file="config/build.properties" />
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="lib/ant/ant-contrib.jar" />
+		</classpath>
+	</taskdef>
+
+	<path id="mlant-classpath">
+		<fileset dir="lib/ant/">
+			<include name="xcc.jar" />
+			<include name="mlant.jar" />
+			<include name="corb.jar" />
+			<include name="saxon9he.jar" />
+			<include name="xqdoc-ml.jar" />
+			<include name="antlr-2.7.5.jar" />
+			<include name="xqdoc-ml.jar" />
+		</fileset>
+	</path>
+	<!--
+	       Setup the type definition and assign classpathref to mlant-classpath
+	    -->
+	<typedef uri="http://www.marklogic.com/ant" resource="com/marklogic/ant/antlib.xml" classpathref="mlant-classpath" />
+
+	<target name="help" description="">
+		<echo message="Help file for xqrails install" />
+		<echo message="" />
+		<echo message="Functions:" />
+		<echo message="		install - installs the base xqrails application, forest, security and database [verify build properties and read readme.txt]" />
+		<echo message="" />
+		<echo message="		load-documentation - loads all of the docs into the application database" />
+		<echo message="" />
+		<echo message="" />
+		<echo message="Help file for xqrails scaffolding" />
+		<echo message="" />
+		<echo message="Functions:" />
+		<echo message="		generate-all - Generates controller, model, views and docs for object" />
+		<echo message="			params:" />
+		<echo message="			-Dobject=[name of the object]" />
+		<echo message="			-Dxqmvc.generate.overwrite=[true|false (default)]" />
+		<echo message="" />
+		<echo message="		generate-controller - Generates controller for object" />
+		<echo message="			params:" />
+		<echo message="			-Dobject=[name of the object]" />
+		<echo message="			-Dxqmvc.generate.overwrite=[true|false (default)]" />
+		<echo message="" />
+		<echo message="		generate-model - Generates model for object" />
+		<echo message="			params:" />
+		<echo message="			-Dobject=[name of the object]" />
+		<echo message="			-Dxqmvc.generate.overwrite=[true|false (default)]" />
+		<echo message="" />
+		<echo message="		generate-views - Generates views for object" />
+		<echo message="			params:" />
+		<echo message="			-Dobject=[name of the object]" />
+		<echo message="			-Dxqmvc.generate.overwrite=[true|false (default)]" />
+		<echo message="" />
+		<echo message="		generate-docs - Generates docs for object" />
+		<echo message="			params:" />
+		<echo message="			-Dobject=[name of the object]" />
+		<echo message="			-Dxqmvc.generate.overwrite=[true|false (default)]" />
+		<echo message="" />
+		<echo message="Transient models: -Dxqrails.model.transient=true" />
+	</target>
+
+</project>
+

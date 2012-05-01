@@ -1,0 +1,296 @@
+<documentation>
+	<title>@object-escaped@</title>
+	<description>The @object-escaped@ service is responsible for the CRUD operations of the @object-escaped@ object.</description>
+	<requests>
+		<request>
+			<method>GET</method>
+			<url>/@object-escaped@</url>
+			<description>Returns a list of @object-escaped@s stored in the system</description>
+			<parameters>
+				<parameter>
+					<name>offset</name>
+					<type>int</type>
+					<description>The start record for the list of returned records</description>
+					<required>false</required>
+				</parameter>
+				<parameter>
+					<name>max</name>
+					<type>int</type>
+					<description>The number of records to return per response</description>
+					<required>false</required>
+				</parameter>
+				<parameter>
+					<name>filter</name>
+					<type>string</type>
+					<description>A string representing a partial or full match during full text search</description>
+					<required>false</required>
+				</parameter>
+				<parameter>
+					<name>sort</name>
+					<type>string</type>
+					<description>The column to sort on with appended ASC or DESC e.g. title ASC</description>
+					<required>false</required>
+				</parameter>
+			</parameters>
+			<responses>
+				<response>
+					<httpCode>200</httpCode>
+					<description>Ok</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample>
+<data><total>2</total><count>2</count><@object-escaped@><identifier>e9b8784b-831a-008e-28ed-9cc0bd8ba124</identifier><title>test</title><description> test</description><createdBy>security-anon</createdBy><dateCreated>2012-01-06T23:13:23.659436-07:00</dateCreated><lastUpdated>2012-01-06T23:13:23.659436-07:00</lastUpdated></@object-escaped@><@object-escaped@><identifier>8e40bb8d-94f2-855c-6caf-9c2a63657569</identifier><title>test again</title><description>testing </description><createdBy>security-anon</createdBy><dateCreated>2012-01-07T00:09:10.355278-07:00</dateCreated><lastUpdated>2012-01-07T00:09:10.355278-07:00</lastUpdated></@object-escaped@></data>
+							</sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample>
+{ "data": {"count":2,"total":2,"@object-escaped@": [{"identifier":"e9b8784b-831a-008e-28ed-9cc0bd8ba124","title":"test","description":"\u00A0test","createdBy":"security-anon","dateCreated":"2012-01-06T23:13:23.659436-07:00","lastUpdated":"2012-01-06T23:13:23.659436-07:00"},{"identifier":"8e40bb8d-94f2-855c-6caf-9c2a63657569","title":"test again","description":"testing\u00A0","createdBy":"security-anon","dateCreated":"2012-01-07T00:09:10.355278-07:00","lastUpdated":"2012-01-07T00:09:10.355278-07:00"}]}}</sample>
+						</output>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>401</httpCode>
+					<description>Not Authorized</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>500</httpCode>
+					<description>Error</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+					</outputs>
+				</response>
+			</responses>
+		</request>
+		<request>
+			<method>GET</method>
+			<url>/@object-escaped@/$id</url>
+			<description>Returns the @object-escaped@ for the specified id</description>
+			<parameters>
+			</parameters>
+			<responses>
+				<response>
+					<httpCode>200</httpCode>
+					<description>Ok</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample>
+<data><total>1</total><count>1</count><@object-escaped@><identifier>8e40bb8d-94f2-855c-6caf-9c2a63657569</identifier><title>test again</title><description>testing </description><createdBy>security-anon</createdBy><dateCreated>2012-01-07T00:09:10.355278-07:00</dateCreated><lastUpdated>2012-01-07T00:09:10.355278-07:00</lastUpdated></@object-escaped@></data>
+</sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample>
+{ "data": {"count":1,"total":1,"@object-escaped@": [{"identifier":"8e40bb8d-94f2-855c-6caf-9c2a63657569","title":"test again","description":"testing\u00A0","createdBy":"security-anon","dateCreated":"2012-01-07T00:09:10.355278-07:00","lastUpdated":"2012-01-07T00:09:10.355278-07:00"}]}}</sample>
+						</output>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>401</httpCode>
+					<description>Not Authorized</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>404</httpCode>
+					<description>Not Found</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>500</httpCode>
+					<description>Error</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+					</outputs>
+				</response>
+			</responses>
+		</request>
+		<request>
+			<method>POST</method>
+			<url>/@object-escaped@</url>
+			<description>Creates a new @object-escaped@ object with a generated identifier</description>
+			<parameters>
+				<parameter>
+					<name>title</name>
+					<type>string</type>
+					<description>Title of the @object-escaped@</description>
+					<required>true</required>
+				</parameter>
+				<parameter>
+					<name>description</name>
+					<type>string</type>
+					<description>Description of the @object-escaped@</description>
+					<required>true</required>
+				</parameter>
+			</parameters>
+			<responses>
+				<response>
+					<httpCode>200</httpCode>
+					<description>Ok</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample>
+<data><total>1</total><count>1</count><@object-escaped@><identifier>3c35d3d0-d848-8c04-e528-22ce05072ff4</identifier><title/><description/><createdBy>security-anon</createdBy><dateCreated>2012-01-07T00:17:21.705356-07:00</dateCreated><lastUpdated>2012-01-07T00:17:21.705356-07:00</lastUpdated></@object-escaped@></data>
+</sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample>
+{ "data": {"count":1,"total":1,"@object-escaped@": [{"identifier":"5e9e27d6-0052-d7ad-9ee9-fd1bcaddae47","title":"","description":"","createdBy":"security-anon","dateCreated":"2012-01-07T00:17:46.010054-07:00","lastUpdated":"2012-01-07T00:17:46.010054-07:00"}]}}</sample>
+						</output>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>401</httpCode>
+					<description>Not Authorized</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>500</httpCode>
+					<description>Error</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+					</outputs>
+				</response>
+			</responses>
+		</request>
+		<request>
+			<method>PUT</method>
+			<url>/@object-escaped@/$id</url>
+			<description>Updates a @object-escaped@ object with the specified id</description>
+			<parameters>
+				<parameter>
+					<name>title</name>
+					<type>string</type>
+					<description>Title of the @object-escaped@</description>
+					<required>true</required>
+				</parameter>
+				<parameter>
+					<name>description</name>
+					<type>string</type>
+					<description>Description of the @object-escaped@</description>
+					<required>true</required>
+				</parameter>
+			</parameters>
+			<responses>
+				<response>
+					<httpCode>200</httpCode>
+					<description>Ok</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample>
+<data><total>1</total><count>1</count><@object-escaped@><identifier>8e40bb8d-94f2-855c-6caf-9c2a63657569</identifier><title>test again</title><description>testing </description><createdBy>security-anon</createdBy><dateCreated>2012-01-07T00:09:10.355278-07:00</dateCreated><lastUpdated>2012-01-07T00:09:10.355278-07:00</lastUpdated></@object-escaped@></data>
+</sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample>
+{ "data": {"count":1,"total":1,"@object-escaped@": [{"identifier":"5e9e27d6-0052-d7ad-9ee9-fd1bcaddae47","title":"","description":"","createdBy":"security-anon","dateCreated":"2012-01-07T00:17:46.010054-07:00","lastUpdated":"2012-01-07T00:17:46.010054-07:00"}]}}</sample>
+						</output>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>401</httpCode>
+					<description>Not Authorized</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>404</httpCode>
+					<description>Not Found</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>500</httpCode>
+					<description>Error</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+					</outputs>
+				</response>
+			</responses>
+		</request>
+		<request>
+			<method>DELETE</method>
+			<url>/@object-escaped@/$id</url>
+			<description>Deletes the @object-escaped@ for the specified id</description>
+			<parameters>
+			</parameters>
+			<responses>
+				<response>
+					<httpCode>204</httpCode>
+					<description>Ok</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>401</httpCode>
+					<description>Not Authorized</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>404</httpCode>
+					<description>Not Found</description>
+					<outputs>
+					</outputs>
+				</response>
+				<response>
+					<httpCode>500</httpCode>
+					<description>Error</description>
+					<outputs>
+						<output>
+							<type>application/xml</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+						<output>
+							<type>application/json</type>
+							<sample><![CDATA[ ]]></sample>
+						</output>
+					</outputs>
+				</response>
+			</responses>
+		</request>
+	</requests>
+	<notes>
+		<note>All requests can be passed with additional parameters.</note>
+		<note>requestFormat - defaults to HTML but accepts [application/xml, application/json]</note>
+		<note>method - overrides the default http method in http header [get, put, post, delete]</note>
+	</notes>
+</documentation>
