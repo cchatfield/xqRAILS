@@ -24,13 +24,42 @@ import module namespace xqrails-conf = "http://avalonconsult.com/xqrails/core/co
 
 declare variable $error:errors as node()* external;
 
-xqrails:layout
-        (
-            'error', 
-            (
-                'responseFormat', 'text/html',
-                'message', if ($error:errors)  then $error:errors else <errors/>,
-                'statusCode', xdmp:get-response-code()
-            )
-        ) 
+let $error:errors :=
+    if ($error:errors)  then $error:errors else <errors/>
+let $model := map:map()
+let $_ := map:put($model,"errorCode", xdmp:get-response-code())
+let $_ := map:put($model,"errorDescription", $error:errors)
+let $_ := xdmp:log(fn:concat("********************* error boi! " ,  xdmp:get-response-code()[1]))
+
+return
+    if ($error:errors/error:code/text() eq "SVC-FILOPN") then
+    (
+        let $_ := map:put($model,"errorCode", 404)
+        let $_ := map:put($model,"errorDescription", "File Not Found")
+        let $_ := xdmp:log(fn:concat("********************* missing file! " ,  xdmp:get-response-code()[1]))
+        return
+            xqrails:layout
+                (
+                    'error', 
+                    (
+                        'responseFormat', 'text/html',
+                        'message', if ($error:errors)  then $error:errors else <errors/>,
+                        'statusCode', 404,
+                        'body', xqrails:view('error/error.html', $model)
+                    )
+                ) 
+    )
+    else
+    (
+        xqrails:layout
+                (
+                    'error', 
+                    (
+                        'responseFormat', 'text/html',
+                        'message', if ($error:errors)  then $error:errors else <errors/>,
+                        'statusCode', xdmp:get-response-code(),
+                        'body', xqrails:view('error/error.html', $model)
+                    )
+                ) 
+    )
 

@@ -43,6 +43,7 @@
 				<ml:param name="port" ns="" type="string" value="${xqRails.application.port}" />
 				<ml:param name="name" ns="" type="string" value="${xqRails.application.name}" />
 				<ml:param name="router" ns="" type="string" value="${xqRails.application.urlRewriter}" />
+				<ml:param name="error" ns="" type="string" value="${xqRails.application.error}" />
 				<ml:param name="source" ns="" type="string" value="${xqRails.application.projectLocation}" />
 			</ml:paramset>
 		</ml:invoke>

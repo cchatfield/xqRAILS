@@ -26,4 +26,4 @@ declare variable $model as map:map external;
 
 xdmp:set-response-content-type(map:get($model, 'responseFormat')),
 xdmp:set-response-code(map:get($model, 'statusCode'), ""),
-map:get($model, 'error')
+map:get($model, 'body')
